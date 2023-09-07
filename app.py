@@ -14,10 +14,9 @@ def main():
     load_dotenv()
 
     # build the UI
-    st.set_page_config(page_title="LLM Powered Multi PDFs Question Answering",page_icon=":books:")
+    st.set_page_config(page_title="PDFs to Bot",page_icon=":books:")
     st.write(css, unsafe_allow_html=True)
-
-    st.markdown("<h1 style='text-align: center;'>LLM Powered Multi PDFs Question Answering</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>📚 PDFs to Bot 📚</h1>", unsafe_allow_html=True)
 
     # initiate the session_state
     if "conversation" not in st.session_state:
@@ -36,13 +35,10 @@ def main():
         with st.spinner("Reading"):
             # get PDFs texts
             raw_text = get_pdfs_texts(pdf_docs)
-
             # get the texts chunks
             text_chunks = get_text_chunks(raw_text)
-
             # create vector store
             vectorstore = get_vectorestore(text_chunks)
-
             # create conversation chain
             st.session_state.conversation = get_conversation_chain(vectorstore)
 
